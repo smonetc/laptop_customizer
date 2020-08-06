@@ -1,42 +1,39 @@
 import React from 'react';
+import { FeatureOption } from './Feature-Option/FeatureOption';
+import { FeatureSection } from './Feature-Section/FeatureSection';
 import slugify from 'slugify';
-
 
 export class Features extends React.Component{
     render(){
-        return(
-            Object.keys(this.props.features).map((feature, idx) => {
-                    const featureHash = feature + '-' + idx;
-                    const options = this.props.features[feature].map(item => {
-                      const itemHash = slugify(JSON.stringify(item));
-                      return (
-                        <div key={itemHash} className="feature__item">
-                          <input
-                            type="radio"
-                            id={itemHash}
-                            className="feature__option"
-                            name={slugify(feature)}
-                            checked={item.name === this.props.selected[feature].name}
-                            onChange={e => this.props.onChange(feature, item)}
-                          />
-                          <label htmlFor={itemHash} className="feature__label">
-                            {item.name} ({new Intl.NumberFormat('en-US', {
-                            style: 'currency',
-                            currency: 'USD'
-                            }).format(item.cost)})
-                          </label>
-                        </div>
-                      );
-                    });
-                    return (
-                      <fieldset className="feature" key={featureHash}>
-                        <legend className="feature__name">
-                          <h3>{feature}</h3>
-                        </legend>
-                        {options}
-                      </fieldset>
-                    );
-                  })
-            )
+        const features = Object.keys(this.props.features).map((feature, idx) => {
+              const featureHash = feature + '-' + idx;
+              const options = this.props.features[feature].map(item => {
+              const itemHash = slugify(JSON.stringify(item));
+            return(
+
+              <FeatureOption  
+                selected={this.props.selected}
+                itemHash={itemHash}
+                feature={feature}
+                item={item}
+                key={item.name}
+                onChange={this.props.updateFeature}
+                />
+            );
+          });
+          return(              
+            <FeatureSection
+              key={idx}
+              feature={feature}
+              options={options}
+              featureHash={featureHash}/>
+              );
+          });
+          return(
+            <form className="main__form">
+            <h2>Customize your laptop</h2>
+              {features}
+            </form>
+          )
         }
-    }
+      }
