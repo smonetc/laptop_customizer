@@ -17,7 +17,7 @@ export class Features extends React.Component{
                 feature={feature}
                 item={item}
                 key={item.name}
-                onChange={this.props.updateFeature}
+                updateFeature={this.props.updateFeature}
                 />
             );
           });

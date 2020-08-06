@@ -47,7 +47,7 @@ class App extends Component {
            <Features 
             features={this.props.features} 
             selected={this.state.selected}
-            onChange={this.updateFeature}
+            updateFeature={this.updateFeature}
            />
           <Cart selected={this.state.selected} />
         </main>

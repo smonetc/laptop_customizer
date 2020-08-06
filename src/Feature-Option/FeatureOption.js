@@ -12,7 +12,7 @@ export class FeatureOption extends React.Component{
               className="feature__option"
               name={slugify(this.props.feature)}
               checked={this.props.item.name === this.props.selected[this.props.feature].name}
-              onChange={e => this.props.onChange(this.props.feature, this.props.item)}
+              onChange={e => this.props.updateFeature(this.props.feature, this.props.item)}
             />
             <label htmlFor={this.props.itemHash} className="feature__label">
               {this.props.item.name} ({new Intl.NumberFormat('en-US', {
